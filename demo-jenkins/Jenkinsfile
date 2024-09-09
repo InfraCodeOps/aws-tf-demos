@@ -1,0 +1,37 @@
+
+// This Jenkinsfile initializes Terraform,
+// validates Terraform configuration,
+// shows a plan of changes,
+// and applies them.
+
+pipeline {
+    agent any
+    stages {
+        stage('Hello Greet') {
+            steps {
+                sh 'echo Hello from SCM!'
+            }
+        }
+        stage('Terraform Init') {
+            steps {
+                sh 'terraform init'
+            }
+        }
+        stage('Terraform Validate') {
+            steps {
+                sh 'terraform validate'
+            }
+        }
+        stage('Terraform Plan') {
+            steps {
+                sh 'terraform plan -out=tfplan'
+            }
+        }
+        stage('Terraform Apply') {
+            steps {
+                sh 'terraform apply -auto-approve tfplan'
+            }
+        }
+    }
+}
+
